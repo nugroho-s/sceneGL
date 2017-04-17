@@ -1,17 +1,14 @@
 #include <GL/glut.h>
 #include <iostream>
 
+#define light_blue 76, 159, 247
+#define dark_blue 41, 109, 219
+#define red 255,0,0
+
 #define ymaks 800
 #define xmaks 1200
 
 using namespace std;
-
-// Paha kanan part 1
-int background[] = {
-	0,0,
-    100,0,
-    600,400
-};
 
 //draw triangles
 /* mode
@@ -36,27 +33,72 @@ void drawTriangles(int* arr, int len, char mode){
 };
 
 void drawBackground(){
-    int jarak = 100;
+    int jarak = 50;
     glBegin(GL_TRIANGLES);
-    for (int i=0;i<xmaks-jarak;i+=(jarak*2)){
-        glVertex2f(i,800);
-        glVertex2f(i+jarak,800);
-        glVertex2f(xmaks/2,ymaks/2);
+	int j=0;
+    for (int i=0;i<xmaks;i+=(jarak)){
+		if (j%2){
+			glColor3ub(light_blue);
+			glVertex2f(i,800);
+			glVertex2f(xmaks/2,ymaks/2);
+			glColor3ub(dark_blue);
+	        glVertex2f(i+jarak,800);
+		} else {
+			glColor3ub(dark_blue);
+			glVertex2f(i,800);
+			glColor3ub(light_blue);
+	        glVertex2f(i+jarak,800);
+	        glVertex2f(xmaks/2,ymaks/2);
+		}
+		j++;
     }
-    for (int i=800;i>jarak;i-=(jarak*2)){
-        glVertex2f(1200,i);
-        glVertex2f(1200,i-jarak);
-        glVertex2f(xmaks/2,ymaks/2);
+    for (int i=800;i>0;i-=(jarak)){
+		if (j%2){
+			glColor3ub(light_blue);
+			glVertex2f(1200,i);
+			glVertex2f(xmaks/2,ymaks/2);
+			glColor3ub(dark_blue);
+	        glVertex2f(1200,i-jarak);
+		} else{
+			glColor3ub(dark_blue);
+			glVertex2f(1200,i);
+			glColor3ub(light_blue);
+	        glVertex2f(1200,i-jarak);
+	        glVertex2f(xmaks/2,ymaks/2);
+		}
+		j++;
     }
-    for (int i=xmaks;i>jarak;i-=(jarak*2)){
-        glVertex2f(i,0);
-        glVertex2f(i-jarak,0);
-        glVertex2f(xmaks/2,ymaks/2);
+    for (int i=xmaks;i>0;i-=(jarak)){
+		if (j%2){
+			glColor3ub(light_blue);
+			glVertex2f(i,0);
+			glVertex2f(xmaks/2,ymaks/2);
+			glColor3ub(dark_blue);
+	        glVertex2f(i-jarak,0);
+		} else {
+			glColor3ub(dark_blue);
+			glVertex2f(i,0);
+			glColor3ub(light_blue);
+	        glVertex2f(i-jarak,0);
+	        glVertex2f(xmaks/2,ymaks/2);
+		}
+		j++;
     }
-    for (int i=0;i<ymaks-jarak;i+=(jarak*2)){
-        glVertex2f(0,i);
-        glVertex2f(0,i+jarak);
-        glVertex2f(xmaks/2,ymaks/2);
+    for (int i=0;i<ymaks;i+=(jarak)){
+		if (j%2){
+			glColor3ub(light_blue);
+			glVertex2f(0,i);
+			glVertex2f(xmaks/2,ymaks/2);
+			glColor3ub(dark_blue);
+	        glVertex2f(0,i+jarak);
+		} else {
+			glColor3ub(dark_blue);
+			glVertex2f(0,i);
+			glColor3ub(light_blue);
+	        glVertex2f(0,i+jarak);
+	        glVertex2f(xmaks/2,ymaks/2);
+		}
+		j++;
     }
     glEnd();
 }
