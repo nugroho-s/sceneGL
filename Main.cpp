@@ -1,5 +1,8 @@
+#include "stdafx.h"
 #include <GL/glut.h>
 #include <iostream>
+#include <math.h>
+
 
 #define light_blue 76, 159, 247
 #define dark_blue 41, 109, 219
@@ -7,7 +10,7 @@
 
 #define ymaks 800
 #define xmaks 1200
-
+#define PI 3.14159265359;
 using namespace std;
 
 //draw triangles
@@ -32,75 +35,128 @@ void drawTriangles(int* arr, int len, char mode){
 	glEnd();
 };
 
+
+
 void drawBackground(){
-    int jarak = 50;
-    glBegin(GL_TRIANGLES);
-	int j=0;
-    for (int i=0;i<xmaks;i+=(jarak)){
-		if (j%2){
+	int jarak = 50;
+	glBegin(GL_TRIANGLES);
+	int j = 0;
+	for (int i = 0; i<xmaks; i += (jarak)){
+		if (j % 2){
 			glColor3ub(light_blue);
-			glVertex2f(i,800);
-			glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(i, 800);
+			glVertex2f(xmaks / 2, ymaks / 2);
 			glColor3ub(dark_blue);
-	        glVertex2f(i+jarak,800);
-		} else {
+			glVertex2f(i + jarak, 800);
+		}
+		else {
 			glColor3ub(dark_blue);
-			glVertex2f(i,800);
+			glVertex2f(i, 800);
 			glColor3ub(light_blue);
-	        glVertex2f(i+jarak,800);
-	        glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(i + jarak, 800);
+			glVertex2f(xmaks / 2, ymaks / 2);
 		}
 		j++;
-    }
-    for (int i=800;i>0;i-=(jarak)){
-		if (j%2){
+	}
+	for (int i = 800; i>0; i -= (jarak)){
+		if (j % 2){
 			glColor3ub(light_blue);
-			glVertex2f(1200,i);
-			glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(1200, i);
+			glVertex2f(xmaks / 2, ymaks / 2);
 			glColor3ub(dark_blue);
-	        glVertex2f(1200,i-jarak);
-		} else{
+			glVertex2f(1200, i - jarak);
+		}
+		else{
 			glColor3ub(dark_blue);
-			glVertex2f(1200,i);
+			glVertex2f(1200, i);
 			glColor3ub(light_blue);
-	        glVertex2f(1200,i-jarak);
-	        glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(1200, i - jarak);
+			glVertex2f(xmaks / 2, ymaks / 2);
 		}
 		j++;
-    }
-    for (int i=xmaks;i>0;i-=(jarak)){
-		if (j%2){
+	}
+	for (int i = xmaks; i>0; i -= (jarak)){
+		if (j % 2){
 			glColor3ub(light_blue);
-			glVertex2f(i,0);
-			glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(i, 0);
+			glVertex2f(xmaks / 2, ymaks / 2);
 			glColor3ub(dark_blue);
-	        glVertex2f(i-jarak,0);
-		} else {
+			glVertex2f(i - jarak, 0);
+		}
+		else {
 			glColor3ub(dark_blue);
-			glVertex2f(i,0);
+			glVertex2f(i, 0);
 			glColor3ub(light_blue);
-	        glVertex2f(i-jarak,0);
-	        glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(i - jarak, 0);
+			glVertex2f(xmaks / 2, ymaks / 2);
 		}
 		j++;
-    }
-    for (int i=0;i<ymaks;i+=(jarak)){
-		if (j%2){
+	}
+	for (int i = 0; i<ymaks; i += (jarak)){
+		if (j % 2){
 			glColor3ub(light_blue);
-			glVertex2f(0,i);
-			glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(0, i);
+			glVertex2f(xmaks / 2, ymaks / 2);
 			glColor3ub(dark_blue);
-	        glVertex2f(0,i+jarak);
-		} else {
+			glVertex2f(0, i + jarak);
+		}
+		else {
 			glColor3ub(dark_blue);
-			glVertex2f(0,i);
+			glVertex2f(0, i);
 			glColor3ub(light_blue);
-	        glVertex2f(0,i+jarak);
-	        glVertex2f(xmaks/2,ymaks/2);
+			glVertex2f(0, i + jarak);
+			glVertex2f(xmaks / 2, ymaks / 2);
 		}
 		j++;
-    }
-    glEnd();
+	}
+	glEnd();
+}
+void matahari(GLfloat x, GLfloat y, GLfloat radius){
+	int i;
+	int triangleAmount = 40;
+
+	GLfloat rluar = radius+40;
+	GLfloat rdalam = radius+10;
+
+	GLfloat twicePi = 2.0f * PI;
+	x = xmaks / 2;
+	y = ymaks / 2;
+
+	glColor3ub(246,210, 52);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(x, y); // center of circle
+	for (i = 0; i <= triangleAmount; i++) {
+		if (i % 2 == 0){
+			glVertex2f(
+				x + (rluar* cos(i *  twicePi / triangleAmount)),
+				y + (rluar * sin(i * twicePi / triangleAmount))
+				);
+		}
+		else{
+			glVertex2f(
+				x + (rdalam* cos(i *  twicePi / triangleAmount)),
+				y + (rdalam * sin(i * twicePi / triangleAmount))
+				);
+		}
+	}
+	glEnd();
+
+	float a = 2*PI;
+
+	cout << "Nilai Cosinus" <<endl<< cos(a);
+
+	glColor3ub(235, 196, 17);
+
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(x, y); // center of circle
+	for (i = 0; i <= triangleAmount; i++) {
+		glVertex2f(
+			x + (radius * cos(i *  twicePi / triangleAmount)),
+			y + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
 }
 
 // Menggambarkan keseluruhan komponen
@@ -108,6 +164,7 @@ void Draw() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3ub(76, 159, 247);
 	drawBackground();
+	matahari(xmaks / 2, ymaks / 2, 100);
 	glFlush();
 }
 
@@ -119,6 +176,9 @@ void Initialize() {
 	glOrtho(0, 1200, 0, 800, -2, 2);
 	glEnable(GL_COLOR_MATERIAL);
 }
+
+
+
 
 
 
