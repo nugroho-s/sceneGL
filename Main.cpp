@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
@@ -204,11 +203,8 @@ void Draw() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3ub(76, 159, 247);
 	drawBackground();
-<<<<<<< HEAD
 	drawRainbow(15);
-=======
 	matahari(xmaks / 2, ymaks / 2, 100);
->>>>>>> c168fe3cbaf0ac83936615bbee5a663b7d6bc99d
 	glFlush();
 }
 
