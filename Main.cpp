@@ -1,9 +1,12 @@
 #include <GL/glut.h>
 #include <iostream>
+#include <cmath>
 
 #define light_blue 76, 159, 247
 #define dark_blue 41, 109, 219
 #define red 255,0,0
+#define yellow 255,255,0
+#define green 0,255,0
 
 #define ymaks 800
 #define xmaks 1200
@@ -29,6 +32,47 @@ void drawTriangles(int* arr, int len, char mode){
 		glVertex2f(arr[j], ymaks - arr[j + 1]);
 		j += 2;
 	}
+	glEnd();
+};
+
+// returns ordinat for a given absis
+int rainbowY(int x){
+	return (int)(-0.0003*(pow(x,2))+0.36*x+600);
+};
+
+int rainbowX(int y){
+	return sqrt(y);
+};
+
+void drawRainbow(int range){
+	glBegin(GL_LINES);
+	int y;
+	for (int x=0;x<xmaks;x++){
+		y = rainbowY(x);
+		// red to yellow
+		glColor3ub(255,0,0);
+		glVertex2f(x,y);
+		glColor3ub(255,255,0);
+		glVertex2f(x,y-range);
+		// yellow to green
+		glVertex2f(x,y-range);
+		glColor3ub(0,255,0);
+		glVertex2f(x,y-(2*range));
+		// green to blue
+		glVertex2f(x,y-(2*range));
+		glColor3ub(0,0,255);
+		glVertex2f(x,y-(3*range));
+		// blue to purple
+		glVertex2f(x,y-(3*range));
+		glColor3ub(128,0,128);
+		glVertex2f(x,y-(4*range));
+	}
+	// int x;
+	// for (int y=0;y<ymaks;y++){
+	// 	x = rainbowX(y);
+	// 	glVertex2f(x+(xmaks/2),y);
+	// 	glVertex2f((xmaks/2)-x,y);
+	// }
 	glEnd();
 };
 
@@ -108,6 +152,7 @@ void Draw() {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3ub(76, 159, 247);
 	drawBackground();
+	drawRainbow(15);
 	glFlush();
 }
 
