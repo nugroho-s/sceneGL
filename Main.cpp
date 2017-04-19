@@ -9,6 +9,8 @@
 #define red 255,0,0
 #define yellow 255,255,0
 #define green 0,255,0
+#define dark_green 1, 127, 5
+#define light_green 0, 224, 7
 
 #define ymaks 800
 #define xmaks 1200
@@ -54,13 +56,34 @@ int rainbowX(int y){
 };
 
 void drawTree(int awal, int batas){
-	glBegin(GL_LINES);
-	for(int x = awal;x < batas;x++){
-		glColor3ub(139,69,19);
-		glVertex2f(x,10);
-		glVertex2f(x,360);
-	}
+	int height = 600;
+	int x[] = {
+		awal,800,
+		awal,height,
+		batas,800,
+		batas,800,
+		batas,height,
+		awal,height
+	};
+	glColor3ub(139,69,19);
+	drawTriangles(x,6,'t');
+	int leaves[] = {
+		awal-50,height,
+		batas+50,height,
+		((batas-awal)/2)+awal,height-100
+	};
+	glBegin(GL_TRIANGLES);
+	glColor3ub(dark_green);
+	glVertex2f(awal-50,ymaks-height);
+	glColor3ub(light_green);
+	glVertex2f(((batas-awal)/2)+awal,ymaks-(height-200));
+	glVertex2f(batas+50,ymaks-height);
 	glEnd();
+	// for(int x = awal;x < batas;x++){
+	//
+	// 	glVertex2f(x,0);
+	// 	glVertex2f(x,360);
+	// }
 }
 //
 // /*
@@ -136,14 +159,14 @@ void drawTree(int awal, int batas){
 
 // returns ordinat for a given absis
 int mountainY1(int x){
-	return (int)(-0.001*(pow(x, 2)) + 0.8*x + 15);
+	return (int)(-0.001*(pow(x, 2)) + 0.8*x + 20);
 };
 int mountainY2(int x){
-	return (int)(-0.001*(pow(x, 2)) + 0.8*x + 15);
+	return (int)(-0.00068*(pow(x, 2)) + 0.9*x + 20);
 }
 
 	int mountainY3(int x){
-		return (int)(-0.001*(pow(x, 2)) + 0.8*x + 15);
+		return (int)(-0.0005*(pow(x, 2)) + 0.7*x + 20);
 	};
 
 int mountainX(int y){
@@ -289,8 +312,6 @@ void matahari(GLfloat x, GLfloat y, GLfloat radius){
 	GLfloat rdalam = radius + 10;
 
 	GLfloat twicePi = 2.0f * PI;
-	x = xmaks / 2;
-	y = ymaks / 2;
 
 	glColor3ub(246, 210, 52);
 
@@ -338,14 +359,17 @@ void Draw() {
 	glColor3ub(76, 159, 247);
 	drawBackground();
 	drawRainbow(15);
-	matahari(xmaks / 2, ymaks / 2, 100);
+	matahari(xmaks, ymaks, 100);
 	//radialGradientCircle(50,20);
 	// angularPrism(false);
 	//draw mountain
   drawAv(100 ,1 );
-	drawAv(100 ,2 );
-	drawAv(100 ,3 );
+	drawAv(80 ,2 );
+	drawAv(95 ,3 );
 	drawTree(150, 300);
+	drawTree(150, 200);
+	drawTree(250, 300);
+	drawTree(350, 400);
 	glFlush();
 }
 
