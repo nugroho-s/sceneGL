@@ -159,26 +159,33 @@ void drawTree(int awal, int batas){
 
 // returns ordinat for a given absis
 int mountainY1(int x){
-	return (int)(-0.001*(pow(x, 2)) + 0.8*x + 20);
+	return (int)(-0.0004*(pow(x, 2)) + 0.6*x + 20);
 };
 int mountainY2(int x){
-	return (int)(-0.00068*(pow(x, 2)) + 0.9*x + 20);
-}
-
-	int mountainY3(int x){
-		return (int)(-0.0005*(pow(x, 2)) + 0.7*x + 20);
-	};
-
-int mountainX(int y){
-	return sqrt(y);
+	return (int)(-0.0005*(pow(x, 2)) + 0.75*x + 20);
+};
+int mountainY3(int x){
+	return (int)(-0.0005*(pow(x, 2)) + 0.5*x + 20);
 };
 
 void drawAv(int range, int type) {
+	int xend;
+	int xbegin;
 	glBegin(GL_LINES);
 	int y;
-	for (int x = 0; x<xmaks; x++){
+
+	switch (type) {
+		case 1 :  xbegin = 0;
+				break;
+		case 2 :  xbegin = 260;
+				break;
+		case 3 :  xbegin= 450;
+				break;
+	}
+
+	for (int x = xbegin; x<xmaks; x++){
 		switch (type) {
-			case 1 : y = mountainY1(x);
+			case 1 :  y = mountainY1(x);
 				  break;
 			case 2 :  y = mountainY2(x);
 				  break;
@@ -186,13 +193,15 @@ void drawAv(int range, int type) {
 				  break;
 		}
 		// yellow to green
+		glVertex2f(x, y - (2 * range));
+		glColor3ub(dark_green);
+		glVertex2f(x, y - (3 * range));
+
 		glVertex2f(x, y - range);
 		glColor3ub(0, 255, 0);
 		glVertex2f(x, y - (2 * range));
 
-		glVertex2f(x, y - (2 * range));
-		glColor3ub(255, 255, 0);
-		glVertex2f(x, y - (3 * range));
+
 	}
 	glEnd();
 }
@@ -363,9 +372,9 @@ void Draw() {
 	//radialGradientCircle(50,20);
 	// angularPrism(false);
 	//draw mountain
-  drawAv(100 ,1 );
-	drawAv(80 ,2 );
-	drawAv(95 ,3 );
+  drawAv(80 ,1 );
+	drawAv(95 ,2 );
+	drawAv(120 ,3 );
 	drawTree(150, 300);
 	drawTree(150, 200);
 	drawTree(250, 300);
