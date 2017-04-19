@@ -225,11 +225,11 @@ void drawAv(int range, int type) {
 		}
 		// yellow to green
 		glVertex2f(x, y - range);
-		glColor3ub(0, 255, 0);
+		glColor3ub(dark_green);
 		glVertex2f(x, y - (2 * range));
 
 		glVertex2f(x, y - (2 * range));
-		glColor3ub(255, 255, 0);
+		glColor3ub(light_green);
 		glVertex2f(x, y - (3 * range));
 	}
 	glEnd();
