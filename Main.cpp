@@ -1,3 +1,4 @@
+//#include "stdafx.h"
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
@@ -37,7 +38,7 @@ void drawTriangles(int* arr, int len, char mode){
 
 // returns ordinat for a given absis
 int rainbowY(int x){
-	return (int)(-0.0003*(pow(x,2))+0.36*x+600);
+	return (int)(-0.0003*(pow(x, 2)) + 0.36*x + 600);
 };
 
 int rainbowX(int y){
@@ -49,37 +50,34 @@ void drawTree(int awal, int batas){
 	for(int x = awal;x < batas;x++){
 		glColor3ub(139,69,19);
 		glVertex2f(x,10);
-		glVertex2f(x,300);
+		glVertex2f(x,360);
 	}
-
-		// glVertex2f(x+,10);
-		// glColor3ub(139,69,19);
-		// glVertex2f(300,300);
 	glEnd();
 }
+
 
 void drawRainbow(int range){
 	glBegin(GL_LINES);
 	int y;
-	for (int x=0;x<xmaks;x++){
+	for (int x = 0; x<xmaks; x++){
 		y = rainbowY(x);
 		// red to yellow
-		glColor3ub(255,0,0);
-		glVertex2f(x,y);
-		glColor3ub(255,255,0);
-		glVertex2f(x,y-range);
+		glColor3ub(255, 0, 0);
+		glVertex2f(x, y);
+		glColor3ub(255, 255, 0);
+		glVertex2f(x, y - range);
 		// yellow to green
-		glVertex2f(x,y-range);
-		glColor3ub(0,255,0);
-		glVertex2f(x,y-(2*range));
+		glVertex2f(x, y - range);
+		glColor3ub(0, 255, 0);
+		glVertex2f(x, y - (2 * range));
 		// green to blue
-		glVertex2f(x,y-(2*range));
-		glColor3ub(0,0,255);
-		glVertex2f(x,y-(3*range));
+		glVertex2f(x, y - (2 * range));
+		glColor3ub(0, 0, 255);
+		glVertex2f(x, y - (3 * range));
 		// blue to purple
-		glVertex2f(x,y-(3*range));
-		glColor3ub(128,0,128);
-		glVertex2f(x,y-(4*range));
+		glVertex2f(x, y - (3 * range));
+		glColor3ub(128, 0, 128);
+		glVertex2f(x, y - (4 * range));
 	}
 	// int x;
 	// for (int y=0;y<ymaks;y++){
@@ -168,14 +166,14 @@ void matahari(GLfloat x, GLfloat y, GLfloat radius){
 	int i;
 	int triangleAmount = 40;
 
-	GLfloat rluar = radius+40;
-	GLfloat rdalam = radius+10;
+	GLfloat rluar = radius + 40;
+	GLfloat rdalam = radius + 10;
 
 	GLfloat twicePi = 2.0f * PI;
 	x = xmaks / 2;
 	y = ymaks / 2;
 
-	glColor3ub(246,210, 52);
+	glColor3ub(246, 210, 52);
 
 	glBegin(GL_TRIANGLE_FAN);
 	glVertex2f(x, y); // center of circle
@@ -195,14 +193,16 @@ void matahari(GLfloat x, GLfloat y, GLfloat radius){
 	}
 	glEnd();
 
-	float a = 2*PI;
+	//float a = 2 * PI;
 
-	cout << "Nilai Cosinus" <<endl<< cos(a);
+	//cout << "Nilai Cosinus" << endl << cos(a);
 
-	glColor3ub(235, 196, 17);
+
 
 	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(225, 181, 24);
 	glVertex2f(x, y); // center of circle
+	glColor3ub(253, 237, 0);
 	for (i = 0; i <= triangleAmount; i++) {
 		glVertex2f(
 			x + (radius * cos(i *  twicePi / triangleAmount)),
@@ -212,6 +212,7 @@ void matahari(GLfloat x, GLfloat y, GLfloat radius){
 	glEnd();
 }
 
+
 // Menggambarkan keseluruhan komponen
 void Draw() {
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -219,6 +220,7 @@ void Draw() {
 	drawBackground();
 	drawRainbow(15);
 	matahari(xmaks / 2, ymaks / 2, 100);
+	//radialGradientCircle(50,20);
 	drawTree(150, 300);
 	glFlush();
 }
@@ -231,9 +233,6 @@ void Initialize() {
 	glOrtho(0, 1200, 0, 800, -2, 2);
 	glEnable(GL_COLOR_MATERIAL);
 }
-
-
-
 
 
 
