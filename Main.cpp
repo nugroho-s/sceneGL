@@ -86,7 +86,7 @@ void drawCloud(int x, int y){
 
 // returns ordinat for a given absis
 int rainbowY(int x){
-	return (int)(-0.0003*(pow(x, 2)) + 0.36*x + 600);
+	return (int)(-0.00035*(pow(x, 2)) + 0.36*x + 600);
 };
 
 int rainbowX(int y){
