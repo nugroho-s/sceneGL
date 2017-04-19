@@ -2,6 +2,7 @@
 #include <GL/glut.h>
 #include <iostream>
 #include <cmath>
+#include "time.h"
 
 #define light_blue 76, 159, 247
 #define dark_blue 41, 109, 219
@@ -14,6 +15,13 @@
 #define ymaks 800
 #define xmaks 1200
 #define PI 3.14159265359;
+
+
+typedef struct {
+	int x;
+	int y;
+} point;
+
 using namespace std;
 
 //draw triangles
@@ -77,7 +85,76 @@ void drawTree(int awal, int batas){
 	// 	glVertex2f(x,360);
 	// }
 }
-
+//
+// /*
+// * width and height are the overall width and height we have to work with, displace is
+// * the maximum deviation value. This stops the terrain from going out of bounds if we choose
+// */
+//
+// point* terrain(width, height, displace, roughness){
+// 		srand(time(NULL));
+//     point points[]
+//         // Gives us a power of 2 based on our width
+//     float power = Math.pow(2, Math.ceil(Math.log(width) / (Math.log(2))));
+//
+//     // Set the initial left point
+//     points[0] = height/2 + (Math.random()*displace*2) - displace;
+//     // set the initial right point
+//     points[power] = height/2 + (Math.random()*displace*2) - displace;
+//     displace *= roughness;
+//
+//     // Increase the number of segments
+//     for(var i = 1; i < power; i *=2){
+//         // Iterate through each segment calculating the center point
+//         for(var j = (power/i)/2; j < power; j+= power/i){
+//             points[j] = ((points[j - (power / i) / 2] + points[j + (power / i) / 2]) / 2);
+//             points[j] += (Math.random()*displace*2) - displace
+//         }
+//         // reduce our random range
+//         displace *= roughness;
+//     }
+//     return points;
+// }
+//
+// void angularPrism(bool solid){
+//     // back endcap
+//     glBegin(solid ? GL_TRIANGLES : GL_LINES);
+//     glVertex3f(1, 0, 0);
+//     glVertex3f(0, 0, 0);
+//     glVertex3f(0, 1, 0);
+//     glEnd();
+//
+//     // front endcap
+//     glBegin(solid ? GL_TRIANGLES : GL_LINES);
+//     glVertex3f(1, 0, 1);
+//     glVertex3f(0, 0, 1);
+//     glVertex3f(0, 1, 1);
+//     glEnd();
+//
+//     // bottom
+//     glBegin(solid ? GL_QUADS : GL_LINES);
+//     glVertex3f(0, 0, 0);
+//     glVertex3f(1, 0, 0);
+//     glVertex3f(1, 0, 1);
+//     glVertex3f(0, 0, 1);
+//     glEnd();
+//
+//     // back
+//     glBegin(solid ? GL_QUADS : GL_LINES);
+//     glVertex3f(0, 0, 0);
+//     glVertex3f(0, 1, 0);
+//     glVertex3f(0, 1, 1);
+//     glVertex3f(0, 0, 1);
+//     glEnd();
+//
+//     // top
+//     glBegin(solid ? GL_QUADS : GL_LINES);
+//     glVertex3f(0, 1, 0);
+//     glVertex3f(1, 0, 0);
+//     glVertex3f(1, 0, 1);
+//     glVertex3f(0, 1, 1);
+//     glEnd();
+// }
 
 void drawRainbow(int range){
 	glBegin(GL_LINES);
@@ -109,7 +186,7 @@ void drawRainbow(int range){
 	// 	glVertex2f((xmaks/2)-x,y);
 	// }
 	glEnd();
-};
+}
 
 void drawBackground(){
 	int jarak = 50;
