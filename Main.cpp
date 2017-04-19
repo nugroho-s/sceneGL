@@ -193,6 +193,48 @@ void drawTree(int awal, int batas){
 //     glVertex3f(0, 1, 1);
 //     glEnd();
 // }
+//
+
+// returns ordinat for a given absis
+int mountainY1(int x){
+	return (int)(-0.001*(pow(x, 2)) + 0.8*x + 20);
+};
+int mountainY2(int x){
+	return (int)(-0.00068*(pow(x, 2)) + 0.9*x + 20);
+}
+
+	int mountainY3(int x){
+		return (int)(-0.0005*(pow(x, 2)) + 0.7*x + 20);
+	};
+
+int mountainX(int y){
+	return sqrt(y);
+};
+
+void drawAv(int range, int type) {
+	glBegin(GL_LINES);
+	int y;
+	for (int x = 0; x<xmaks; x++){
+		switch (type) {
+			case 1 : y = mountainY1(x);
+				  break;
+			case 2 :  y = mountainY2(x);
+				  break;
+			case 3 :  y = mountainY3(x);
+				  break;
+		}
+		// yellow to green
+		glVertex2f(x, y - range);
+		glColor3ub(0, 255, 0);
+		glVertex2f(x, y - (2 * range));
+
+		glVertex2f(x, y - (2 * range));
+		glColor3ub(255, 255, 0);
+		glVertex2f(x, y - (3 * range));
+	}
+	glEnd();
+}
+
 
 void drawRainbow(int range){
 	glBegin(GL_LINES);
@@ -357,6 +399,12 @@ void Draw() {
 	drawRainbow(15);
 	matahari(xmaks, ymaks, 100);
 	//radialGradientCircle(50,20);
+	// angularPrism(false);
+	//draw mountain
+  drawAv(100 ,1 );
+	drawAv(80 ,2 );
+	drawAv(95 ,3 );
+	drawTree(150, 300);
 	drawTree(150, 200);
 	drawTree(250, 300);
 	drawTree(350, 400);
