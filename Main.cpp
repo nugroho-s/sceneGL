@@ -44,6 +44,20 @@ int rainbowX(int y){
 	return sqrt(y);
 };
 
+void drawTree(int awal, int batas){
+	glBegin(GL_LINES);
+	for(int x = awal;x < batas;x++){
+		glColor3ub(139,69,19);
+		glVertex2f(x,10);
+		glVertex2f(x,300);
+	}
+
+		// glVertex2f(x+,10);
+		// glColor3ub(139,69,19);
+		// glVertex2f(300,300);
+	glEnd();
+}
+
 void drawRainbow(int range){
 	glBegin(GL_LINES);
 	int y;
@@ -205,6 +219,7 @@ void Draw() {
 	drawBackground();
 	drawRainbow(15);
 	matahari(xmaks / 2, ymaks / 2, 100);
+	drawTree(150, 300);
 	glFlush();
 }
 
