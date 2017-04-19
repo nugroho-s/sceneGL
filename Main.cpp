@@ -11,6 +11,7 @@
 #define green 0,255,0
 #define dark_green 1, 127, 5
 #define light_green 0, 224, 7
+#define cloud_gray 195, 204, 196
 
 #define ymaks 800
 #define xmaks 1200
@@ -44,6 +45,43 @@ void drawTriangles(int* arr, int len, char mode){
 		j += 2;
 	}
 	glEnd();
+};
+
+void drawCloudSphere(int x, int y){
+	int triangleAmount = 40;
+	int i;
+	GLfloat twicePi = 2.0f * PI;
+	int radius = 50;
+	glBegin(GL_TRIANGLE_FAN);
+	glColor3ub(cloud_gray);
+	x+=(int)radius-(0.1*radius);
+	glVertex2f(x, y); // center of circle
+	for (i = 0; i <= triangleAmount; i++) {
+		glVertex2f(
+			x + (radius * cos(i *  twicePi / triangleAmount)),
+			y + (radius * sin(i * twicePi / triangleAmount))
+			);
+	}
+	glEnd();
+}
+
+void drawCloud(int x, int y){
+	int triangleAmount = 40;
+	int i;
+	GLfloat twicePi = 2.0f * PI;
+	glColor3ub(cloud_gray);
+	glBegin(GL_QUADS);
+	glVertex2f(x+50,(y-50));
+	glVertex2f(x+50,(y+50));
+	glVertex2f((x+150),(y+50));
+	glVertex2f((x+150),(y-50));
+	glEnd();
+	drawCloudSphere(x,y);
+	drawCloudSphere(x+100,y);
+	drawCloudSphere(x+25,y+25);
+	drawCloudSphere(x+60,y+20);
+	drawCloudSphere(x+35,y-10);
+	drawCloudSphere(x+70,y-20);
 };
 
 // returns ordinat for a given absis
@@ -322,6 +360,9 @@ void Draw() {
 	drawTree(150, 200);
 	drawTree(250, 300);
 	drawTree(350, 400);
+	drawCloud(350,700);
+	drawCloud(750,600);
+	drawCloud(50,550);
 	glFlush();
 }
 
