@@ -189,9 +189,9 @@ void drawAv(int range, int type) {
 		glVertex2f(x, y - range);
 		glColor3ub(0, 255, 0);
 		glVertex2f(x, y - (2 * range));
-		// green to blue
+
 		glVertex2f(x, y - (2 * range));
-		glColor3ub(0, 0, 255);
+		glColor3ub(255, 255, 0);
 		glVertex2f(x, y - (3 * range));
 	}
 	glEnd();
