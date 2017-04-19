@@ -197,13 +197,13 @@ void drawTree(int awal, int batas){
 
 // returns ordinat for a given absis
 int mountainY1(int x){
-	return (int)(-0.0004*(pow(x, 2)) + 0.6*x + 20);
+	return (int)(-0.0004*(pow(x, 2)) + 0.6*x + 30);
 };
 int mountainY2(int x){
-	return (int)(-0.0005*(pow(x, 2)) + 0.75*x + 20);
+	return (int)(-0.0005*(pow(x, 2)) + 0.75*x);
 };
 int mountainY3(int x){
-	return (int)(-0.0005*(pow(x, 2)) + 0.5*x + 20);
+	return (int)(-0.0005*(pow(x, 2)) + 0.5*x + 100);
 };
 
 void drawAv(int range, int type) {
@@ -213,15 +213,15 @@ void drawAv(int range, int type) {
 	int y;
 
 	switch (type) {
-		case 1 :  xbegin = 0;
+		case 1 :  xbegin = 0; xend = xmaks;
 				break;
-		case 2 :  xbegin = 260;
+		case 2 :  xbegin = -400;
 				break;
-		case 3 :  xbegin= 450;
+		case 3 :  xbegin= -400; xend = xmaks + xbegin + 200;
 				break;
 	}
 
-	for (int x = xbegin; x<xmaks; x++){
+	for (int x = xbegin; x<xend; x++){
 		switch (type) {
 			case 1 :  y = mountainY1(x);
 				  break;
@@ -411,8 +411,8 @@ void Draw() {
 	// angularPrism(false);
 	//draw mountain
   drawAv(80 ,1 );
-	drawAv(95 ,2 );
-	drawAv(120 ,3 );
+	//drawAv(50 ,2 );
+	drawAv(100 ,3 );
 	drawTree(150, 300);
 	drawTree(150, 200);
 	drawTree(250, 300);
