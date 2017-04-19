@@ -86,7 +86,7 @@ void drawCloud(int x, int y){
 
 // returns ordinat for a given absis
 int rainbowY(int x){
-	return (int)(-0.0003*(pow(x, 2)) + 0.36*x + 600);
+	return (int)(-0.00035*(pow(x, 2)) + 0.36*x + 600);
 };
 
 int rainbowX(int y){
@@ -236,10 +236,16 @@ void drawAv(int range, int type) {
 		glVertex2f(x, y - (3 * range));
 
 		glVertex2f(x, y - range);
-		glColor3ub(0, 255, 0);
+		glColor3ub(light_green);
 		glVertex2f(x, y - (2 * range));
 
-
+// <<<<<<< HEAD
+// 		glVertex2f(x, y - (2 * range));
+// 		glColor3ub(light_green);
+// 		glVertex2f(x, y - (3 * range));
+// =======
+//
+// >>>>>>> c4585b4d69dd13614450d184bcb823eefce7ba07
 	}
 	glEnd();
 }
